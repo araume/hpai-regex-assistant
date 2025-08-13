@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Select Profile — Regex Assistant</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Select Profile</h1>
+      <p>Choose an existing profile or create a new one using the master password.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Existing Profiles</h2>
+        <div class="row">
+          <select id="profileSelect"></select>
+          <button id="continueBtn" class="primary">Continue</button>
+          <button id="skipBtn">Continue without profile</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Create New Profile</h2>
+        <div class="row">
+          <input id="newProfileName" type="text" placeholder="Profile name" />
+          <input id="masterInput" type="password" placeholder="Master password" />
+          <button id="createProfile">Create</button>
+        </div>
+        <small class="muted">The master password is managed by the system admin in the server configuration.</small>
+      </section>
+    </main>
+
+    <footer>
+      <small>© 2025 Regex Assistant</small>
+    </footer>
+  </div>
+
+  <script src="/profile.js" type="module"></script>
+</body>
+</html>
+
+

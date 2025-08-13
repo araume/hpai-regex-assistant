@@ -1,0 +1,24 @@
+{
+  "name": "hpai-regex-assistant",
+  "version": "1.0.0",
+  "description": "Regex assistant powered by Gemini AI for Filipino call center phrase detection",
+  "license": "ISC",
+  "author": "mark",
+  "type": "module",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "postinstall": "echo Setup complete"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.16.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regex Assistant (Gemini)</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Regex Assistant</h1>
+      <p>Powered by Gemini. Craft robust regex for Filipino call-center phrase detection.</p>
+      <div class="row">
+        <span id="activeProfile" class="muted"></span>
+        <button id="changeProfileBtn">Change profile</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Your Instruction</h2>
+        <textarea id="instruction" rows="6" placeholder="Halimbawa: Gumawa ng regex na makakahuli ng mga pahayag tungkol sa \"pagbabayad ng utang\", kasama ang mga karaniwang variant at misspellings."></textarea>
+
+        <div class="row">
+          <input id="exampleInput" type="text" placeholder="Optional example phrase (press Add)" />
+          <button id="addExample">Add</button>
+        </div>
+
+        <ul id="examples" class="chips"></ul>
+
+        <div class="row">
+          <label for="language">Flavor:</label>
+          <select id="language">
+            <option value="javascript" selected>JavaScript (ECMAScript)</option>
+            <option value="python">Python (re)</option>
+            <option value="pcre">PCRE</option>
+          </select>
+        </div>
+
+        <button id="generate" class="primary">Generate Regex</button>
+      </section>
+
+      <section class="card" id="resultCard" hidden>
+        <h2>Result</h2>
+        <div class="result-grid">
+          <div>
+            <label>Pattern</label>
+            <pre id="pattern"></pre>
+          </div>
+          <div>
+            <label>Flags</label>
+            <pre id="flags"></pre>
+          </div>
+        </div>
+        <label>Explanation</label>
+        <pre id="explanation" class="explain"></pre>
+
+        <div class="result-grid">
+          <div>
+            <label>Sample Matches</label>
+            <ul id="matches"></ul>
+          </div>
+          <div>
+            <label>Sample Non-Matches</label>
+            <ul id="nonMatches"></ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <label>Test against your own text</label>
+        </div>
+        <textarea id="testText" rows="5" placeholder="I-paste ang text dito"></textarea>
+        <div class="row">
+          <button id="testBtn">Test Regex</button>
+          <button id="copyBtn">Copy Pattern</button>
+        </div>
+        <pre id="testResult"></pre>
+      </section>
+
+      <section class="card" id="logsCard" hidden>
+        <h2>Recent Logs (Profile)</h2>
+        <ul id="logs"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <small>© 2025 Regex Assistant</small>
+    </footer>
+  </div>
+
+  <script src="/main.js" type="module"></script>
+</body>
+</html>
+
+

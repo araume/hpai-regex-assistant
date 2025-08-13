@@ -1,0 +1,71 @@
+:root {
+  --bg: #0b1020;
+  --card: #11162a;
+  --muted: #8ea0b5;
+  --text: #e6edf3;
+  --primary: #6aa3ff;
+  --primary-700: #4c83de;
+  --border: #1f2740;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: radial-gradient(1200px 800px at 80% -10%, #182147, transparent 60%), var(--bg);
+  color: var(--text);
+}
+
+.container { max-width: 980px; margin: 0 auto; padding: 24px; }
+header { margin-bottom: 16px; }
+h1 { margin: 0 0 6px; font-size: 28px; }
+p { margin: 0; color: var(--muted); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+textarea, input, select {
+  width: 100%;
+  background: #0c1226;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+}
+
+.row { display: flex; gap: 10px; align-items: center; margin: 12px 0; }
+.row input { flex: 1; }
+.row select { flex: 0 0 220px; }
+.chips { list-style: none; padding: 0; margin: 8px 0 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.chips li { background: #0b132b; border: 1px solid var(--border); padding: 6px 10px; border-radius: 20px; font-size: 13px; }
+.chips li button { margin-left: 8px; background: transparent; color: var(--muted); border: none; cursor: pointer; }
+
+button {
+  background: #0e1630;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+button.primary { background: var(--primary); color: #0b1020; border-color: var(--primary-700); font-weight: 600; }
+button:disabled { opacity: .6; cursor: not-allowed; }
+
+label { display: block; color: var(--muted); margin: 10px 0 6px; font-size: 13px; }
+pre { background: #0b132b; border: 1px solid var(--border); padding: 12px; border-radius: 10px; overflow: auto; }
+.explain { white-space: pre-wrap; }
+
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 700px){ .result-grid { grid-template-columns: 1fr; } }
+
+footer { margin-top: 12px; color: var(--muted); }
+
+

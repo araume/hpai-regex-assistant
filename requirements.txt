@@ -1,0 +1,6 @@
+@google/generative-ai
+cors
+dotenv
+express
+mongoose
+nodemon
