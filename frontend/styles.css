@@ -59,7 +59,7 @@ textarea, input, select {
   border: 1px solid var(--glass-border);
   border-right-color: var(--glass-dark-border);
   border-bottom-color: var(--glass-dark-border);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 12px 14px;
   outline: none;
   -webkit-backdrop-filter: blur(10px);
@@ -71,7 +71,7 @@ textarea::placeholder, input::placeholder { color: var(--muted-2); }
 .row input { flex: 1; }
 .row select { flex: 0 0 220px; }
 .chips { list-style: none; padding: 0; margin: 8px 0 0; display: flex; gap: 8px; flex-wrap: wrap; }
-.chips li { background: rgba(255,255,255,0.55); border: 1px solid var(--glass-border); padding: 6px 10px; border-radius: 20px; font-size: 13px; }
+.chips li { background: rgba(255,255,255,0.55); border: 1px solid var(--glass-border); padding: 6px 10px; border-radius: 10px; font-size: 13px; }
 .chips li button { margin-left: 8px; background: transparent; color: var(--muted); border: none; cursor: pointer; }
 
 button {
@@ -80,7 +80,7 @@ button {
   border: 1px solid var(--glass-border);
   border-right-color: var(--glass-dark-border);
   border-bottom-color: var(--glass-dark-border);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 10px 14px;
   cursor: pointer;
   -webkit-backdrop-filter: blur(12px);
