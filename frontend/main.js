@@ -10,6 +10,17 @@ const generateBtn = document.getElementById('generate');
 const resultCard = document.getElementById('resultCard');
 const logsCard = document.getElementById('logsCard');
 const logsUl = document.getElementById('logs');
+const historyCard = document.getElementById('historyCard');
+const closeHistoryBtn = document.getElementById('closeHistory');
+const histDate = document.getElementById('histDate');
+const histProfile = document.getElementById('histProfile');
+const histInstruction = document.getElementById('histInstruction');
+const histExamples = document.getElementById('histExamples');
+const histPattern = document.getElementById('histPattern');
+const histFlags = document.getElementById('histFlags');
+const histExplanation = document.getElementById('histExplanation');
+const histMatches = document.getElementById('histMatches');
+const histNonMatches = document.getElementById('histNonMatches');
 const patternPre = document.getElementById('pattern');
 const flagsPre = document.getElementById('flags');
 const explanationPre = document.getElementById('explanation');
@@ -59,9 +70,11 @@ async function refreshLogs() {
     const res = await fetch(`/api/profiles/${encodeURIComponent(currentProfile)}/logs`);
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Failed to load logs');
-    (data.logs || []).slice(0, 20).forEach(l => {
+    const items = (data.logs || []).slice(0, 30);
+    items.forEach(l => {
       const li = document.createElement('li');
       li.textContent = `${new Date(l.createdAt).toLocaleString()} — ${l.instruction}`;
+      li.addEventListener('click', () => showHistory(l));
       logsUl.appendChild(li);
     });
     logsCard.hidden = false;
@@ -69,6 +82,39 @@ async function refreshLogs() {
     console.warn(e.message);
   }
 }
+
+function showHistory(log) {
+  histDate.textContent = new Date(log.createdAt).toLocaleString();
+  histProfile.textContent = currentProfile || '(none)';
+  histInstruction.textContent = log.instruction || '';
+  histExamples.innerHTML = '';
+  (log.examples || []).forEach(ex => {
+    const li = document.createElement('li');
+    li.textContent = ex;
+    histExamples.appendChild(li);
+  });
+  histPattern.textContent = log.extracted?.regex || '';
+  histFlags.textContent = log.extracted?.flags || '';
+  histExplanation.textContent = log.extracted?.explanation || '';
+  histMatches.innerHTML = '';
+  (log.extracted?.sampleMatches || []).forEach(m => {
+    const li = document.createElement('li');
+    li.textContent = m;
+    histMatches.appendChild(li);
+  });
+  histNonMatches.innerHTML = '';
+  (log.extracted?.sampleNonMatches || []).forEach(m => {
+    const li = document.createElement('li');
+    li.textContent = m;
+    histNonMatches.appendChild(li);
+  });
+  historyCard.hidden = false;
+  historyCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+closeHistoryBtn.addEventListener('click', () => {
+  historyCard.hidden = true;
+});
 
 changeProfileBtn.addEventListener('click', () => {
   window.location.href = '/profile.html';

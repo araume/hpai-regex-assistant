@@ -34,7 +34,6 @@
         <ul id="examples" class="chips"></ul>
 
         <div class="row">
-          <label for="language">Flavor:</label>
           <select id="language">
             <option value="javascript" selected>JavaScript (ECMAScript)</option>
             <option value="python">Python (re)</option>
@@ -85,6 +84,51 @@
       <section class="card" id="logsCard" hidden>
         <h2>Recent Logs (Profile)</h2>
         <ul id="logs"></ul>
+      </section>
+
+      <section class="card" id="historyCard" hidden>
+        <div class="row" style="justify-content: space-between;">
+          <h2 style="margin:0;">History Detail</h2>
+          <button id="closeHistory">Close</button>
+        </div>
+        <div class="result-grid">
+          <div>
+            <label>Date</label>
+            <div id="histDate" class="muted"></div>
+          </div>
+          <div>
+            <label>Profile</label>
+            <div id="histProfile" class="muted"></div>
+          </div>
+        </div>
+        <label>Prompt</label>
+        <pre id="histInstruction" class="explain"></pre>
+        <label>User Examples</label>
+        <ul id="histExamples" class="chips"></ul>
+
+        <div class="result-grid">
+          <div>
+            <label>Pattern</label>
+            <pre id="histPattern"></pre>
+          </div>
+          <div>
+            <label>Flags</label>
+            <pre id="histFlags"></pre>
+          </div>
+        </div>
+        <label>Explanation</label>
+        <pre id="histExplanation" class="explain"></pre>
+
+        <div class="result-grid">
+          <div>
+            <label>Positive Samples</label>
+            <ul id="histMatches"></ul>
+          </div>
+          <div>
+            <label>Negative Samples</label>
+            <ul id="histNonMatches"></ul>
+          </div>
+        </div>
       </section>
     </main>
 
