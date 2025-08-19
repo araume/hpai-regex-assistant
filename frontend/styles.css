@@ -18,6 +18,7 @@ body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: var(--text);
   background: linear-gradient(135deg, #B8E4FF 0%, #FAD2FA 100%);
+  background-attachment: fixed;
   position: relative;
 }
 
