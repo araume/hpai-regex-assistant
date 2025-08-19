@@ -124,6 +124,35 @@ router.get('/profiles/:name/logs', async (req, res) => {
   }
 });
 
+// Delete one log by id for a profile
+router.delete('/profiles/:name/logs/:id', async (req, res) => {
+  try {
+    const { name, id } = req.params;
+    const profile = await Profile.findOne({ name }).lean();
+    if (!profile) return res.status(404).json({ error: 'Profile not found' });
+    const result = await RegexQueryLog.deleteOne({ _id: id, profile: profile._id });
+    if (result.deletedCount === 0) return res.status(404).json({ error: 'Log not found' });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Failed to delete log' });
+  }
+});
+
+// Delete all logs for a profile
+router.delete('/profiles/:name/logs', async (req, res) => {
+  try {
+    const { name } = req.params;
+    const profile = await Profile.findOne({ name }).lean();
+    if (!profile) return res.status(404).json({ error: 'Profile not found' });
+    const result = await RegexQueryLog.deleteMany({ profile: profile._id });
+    return res.json({ ok: true, deleted: result.deletedCount });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Failed to delete logs' });
+  }
+});
+
 function buildPrompt({ instruction, examples, language }) {
   const lang = language || 'javascript';
   const examplesText = Array.isArray(examples) && examples.length

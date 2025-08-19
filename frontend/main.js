@@ -10,6 +10,7 @@ const generateBtn = document.getElementById('generate');
 const resultCard = document.getElementById('resultCard');
 const logsCard = document.getElementById('logsCard');
 const logsUl = document.getElementById('logs');
+const deleteAllLogsBtn = document.getElementById('deleteAllLogs');
 const historyCard = document.getElementById('historyCard');
 const closeHistoryBtn = document.getElementById('closeHistory');
 const histDate = document.getElementById('histDate');
@@ -73,8 +74,29 @@ async function refreshLogs() {
     const items = (data.logs || []).slice(0, 30);
     items.forEach(l => {
       const li = document.createElement('li');
-      li.textContent = `${new Date(l.createdAt).toLocaleString()} — ${l.instruction}`;
-      li.addEventListener('click', () => showHistory(l));
+      const span = document.createElement('span');
+      span.className = 'log-text';
+      span.textContent = `${new Date(l.createdAt).toLocaleString()} — ${l.instruction}`;
+      span.addEventListener('click', () => showHistory(l));
+      const actions = document.createElement('div');
+      actions.className = 'log-actions';
+      const del = document.createElement('button');
+      del.textContent = 'Delete';
+      del.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (!confirm('Delete this log?')) return;
+        try {
+          const resDel = await fetch(`/api/profiles/${encodeURIComponent(currentProfile)}/logs/${l._id}`, { method: 'DELETE' });
+          const d = await resDel.json().catch(() => ({}));
+          if (!resDel.ok) throw new Error(d.error || 'Failed to delete');
+          await refreshLogs();
+        } catch (err) {
+          alert(err.message);
+        }
+      });
+      actions.appendChild(del);
+      li.appendChild(span);
+      li.appendChild(actions);
       logsUl.appendChild(li);
     });
     logsCard.hidden = false;
@@ -114,6 +136,20 @@ function showHistory(log) {
 
 closeHistoryBtn.addEventListener('click', () => {
   historyCard.hidden = true;
+});
+
+deleteAllLogsBtn.addEventListener('click', async () => {
+  if (!currentProfile) { alert('Select a profile first'); return; }
+  if (!confirm('Delete ALL logs for this profile?')) return;
+  try {
+    const res = await fetch(`/api/profiles/${encodeURIComponent(currentProfile)}/logs`, { method: 'DELETE' });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to delete logs');
+    historyCard.hidden = true;
+    await refreshLogs();
+  } catch (e) {
+    alert(e.message);
+  }
 });
 
 changeProfileBtn.addEventListener('click', () => {
