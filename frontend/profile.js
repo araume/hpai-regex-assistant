@@ -4,6 +4,8 @@ const skipBtn = document.getElementById('skipBtn');
 const newProfileNameEl = document.getElementById('newProfileName');
 const masterInputEl = document.getElementById('masterInput');
 const createProfileBtn = document.getElementById('createProfile');
+const themeLightRadio = document.getElementById('themeLight');
+const themeDarkRadio = document.getElementById('themeDark');
 
 async function fetchProfiles() {
   try {
@@ -63,5 +65,41 @@ createProfileBtn.addEventListener('click', async () => {
 });
 
 fetchProfiles();
+
+// Theme
+applySavedTheme();
+applyThemeControls();
+function applySavedTheme() {
+  const theme = localStorage.getItem('regexAssistant.theme') || 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+}
+
+function applyThemeControls() {
+  const current = localStorage.getItem('regexAssistant.theme') || 'light';
+  if (themeLightRadio) themeLightRadio.checked = current === 'light';
+  if (themeDarkRadio) themeDarkRadio.checked = current === 'dark';
+
+  [themeLightRadio, themeDarkRadio].forEach(ctrl => {
+    ctrl?.addEventListener('change', (e) => {
+      const to = e.target.value;
+      const rect = e.target.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      const overlay = document.createElement('div');
+      overlay.className = `theme-overlay ${to}`;
+      overlay.style.setProperty('--tx', `${cx}px`);
+      overlay.style.setProperty('--ty', `${cy}px`);
+      document.body.appendChild(overlay);
+      requestAnimationFrame(() => overlay.classList.add('animate'));
+
+      overlay.addEventListener('animationend', () => {
+        document.documentElement.setAttribute('data-theme', to);
+        localStorage.setItem('regexAssistant.theme', to);
+        overlay.remove();
+      }, { once: true });
+    });
+  });
+}
 
 

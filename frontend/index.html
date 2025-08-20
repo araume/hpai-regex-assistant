@@ -16,9 +16,21 @@
       <h1>HELPORT AI</h1>
       <h2>BPO Transcription Phrase Detection</h2>
       <p>Powered by Gemini. A robust regex for Filipino BPO transcription phrase detection.</p>
-      <div class="row">
+      <div class="row" style="justify-content: space-between; align-items:center;">
         <span id="activeProfile" class="muted"></span>
-        <button id="changeProfileBtn">Change profile</button>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <button id="changeProfileBtn">Change profile</button>
+          <div class="theme-switch" aria-label="Theme switch">
+            <input type="radio" id="themeLight" name="theme" value="light" />
+            <label for="themeLight" title="Light">
+              <img src="/sun.svg" alt="Light" width="16" height="16" />
+            </label>
+            <input type="radio" id="themeDark" name="theme" value="dark" />
+            <label for="themeDark" title="Dark">
+              <img src="/moon.svg" alt="Dark" width="16" height="16" />
+            </label>
+          </div>
+        </div>
       </div>
     </header>
 

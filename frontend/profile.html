@@ -13,8 +13,22 @@
 <body>
   <div class="container">
     <header>
-      <h1>Select Profile</h1>
-      <p>Choose an existing profile or create a new one using the master password.</p>
+      <div style="display:flex; justify-content: space-between; align-items: center; gap: 10px;">
+        <div>
+          <h1>Select Profile</h1>
+          <p>Choose an existing profile or create a new one using the master password.</p>
+        </div>
+        <div class="theme-switch" aria-label="Theme switch">
+          <input type="radio" id="themeLight" name="theme" value="light" />
+          <label for="themeLight" title="Light">
+            <img src="/sun.svg" alt="Light" width="16" height="16" />
+          </label>
+          <input type="radio" id="themeDark" name="theme" value="dark" />
+          <label for="themeDark" title="Dark">
+            <img src="/moon.svg" alt="Dark" width="16" height="16" />
+          </label>
+        </div>
+      </div>
     </header>
 
     <main>
